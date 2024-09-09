@@ -15,7 +15,7 @@ def get_requirements(file_path:str)->List[str]:
 
 
 setup(
-    name="mlproject",
+    name="Lungs-Xray-Classification",
     version="0.0.1",
     author="Kunal Shelke",
     author_email="shelkekunal90@gmail.com",
