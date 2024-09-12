@@ -37,17 +37,11 @@ class DataTransformation:
                 [
                     transforms.Resize(self.data_transformation_config.RESIZE),
                     transforms.CenterCrop(self.data_transformation_config.CENTERCROP),
-                    transforms.ColorJitter(
-                        **self.data_transformation_config.color_jitter_transforms
-                    ),
+                    transforms.ColorJitter(**self.data_transformation_config.color_jitter_transforms),
                     transforms.RandomHorizontalFlip(),
-                    transforms.RandomRotation(
-                        self.data_transformation_config.RANDOMROTATION
-                    ),
+                    transforms.RandomRotation(self.data_transformation_config.RANDOMROTATION),
                     transforms.ToTensor(),
-                    transforms.Normalize(
-                        **self.data_transformation_config.normalize_transforms
-                    ),
+                    transforms.Normalize(**self.data_transformation_config.normalize_transforms),
                 ]
             )
 

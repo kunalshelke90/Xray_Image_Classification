@@ -1,12 +1,12 @@
 import sys
 
 from Xray.exception import XRayException
-from Xray.pipeline.training_pipeline import TrainingPipeline
+from Xray.pipeline.training_pipeline import TrainPipeline
 
 
 def start_training():
     try:
-        train_pipeline = TrainingPipeline()
+        train_pipeline = TrainPipeline()
 
         train_pipeline.run_pipeline()
 
