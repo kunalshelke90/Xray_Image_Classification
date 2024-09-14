@@ -20,16 +20,10 @@ class S3Operation:
         """
         logging.info("Entered the upload_file method of S3Operations class")
         try:
-            logging.info(
-                f"Uploading {from_filename} file to {to_filename} file in {bucket_name} bucket"
-            )
+            logging.info(f"Uploading {from_filename} file to {to_filename} file in {bucket_name} bucket")
 
-            self.s3_resource.meta.client.upload_file(
-                from_filename, bucket_name, to_filename
-            )
-            logging.info(
-                f"Uploaded {from_filename} file to {to_filename} file in {bucket_name} bucket"
-            )
+            self.s3_resource.meta.client.upload_file(from_filename, bucket_name, to_filename)
+            logging.info(f"Uploaded {from_filename} file to {to_filename} file in {bucket_name} bucket")
 
             if remove is True:
                 os.remove(from_filename)

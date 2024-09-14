@@ -1,5 +1,4 @@
 import sys
-
 from Xray.cloud_storage.s3_bucket import S3Operation
 from Xray.constant.training_pipeline import *
 from Xray.entity.artifact_entity import DataIngestionArtifact
@@ -32,9 +31,7 @@ class DataIngestion:
         
 
     def initiate_data_ingestion(self) -> DataIngestionArtifact:
-        logging.info(
-            "Entered the initiate_data_ingestion method of Data ingestion class"
-        )
+        logging.info("Entered the initiate_data_ingestion method of Data ingestion class")
 
         try:
             self.get_data_from_s3()
@@ -44,9 +41,7 @@ class DataIngestion:
                 test_file_path=self.data_ingestion_config.test_data_path,
             )
 
-            logging.info(
-                "Exited the initiate_data_ingestion method of Data ingestion class"
-            )
+            logging.info("Exited the initiate_data_ingestion method of Data ingestion class")
 
             return data_ingestion_artifact
 

@@ -15,9 +15,7 @@ class DataIngestionConfig:
 
         self.artifact_dir: str = os.path.join(ARTIFACT_DIR, TIMESTAMP)
 
-        self.data_path: str = os.path.join(
-            self.artifact_dir, "data_ingestion", self.s3_data_folder
-        )
+        self.data_path: str = os.path.join(self.artifact_dir, "data_ingestion", self.s3_data_folder)
 
         self.train_data_path: str = os.path.join(self.data_path, "train")
 
@@ -52,17 +50,11 @@ class DataTransformationConfig:
             "pin_memory": PIN_MEMORY,
         }
 
-        self.artifact_dir: str = os.path.join(
-            ARTIFACT_DIR, TIMESTAMP, "data_transformation"
-        )
+        self.artifact_dir: str = os.path.join(ARTIFACT_DIR, TIMESTAMP, "data_transformation")
 
-        self.train_transforms_file: str = os.path.join(
-            self.artifact_dir, TRAIN_TRANSFORMS_FILE
-        )
+        self.train_transforms_file: str = os.path.join(self.artifact_dir, TRAIN_TRANSFORMS_FILE)
 
-        self.test_transforms_file: str = os.path.join(
-            self.artifact_dir, TEST_TRANSFORMS_FILE
-        )
+        self.test_transforms_file: str = os.path.join(self.artifact_dir, TEST_TRANSFORMS_FILE)
 
 @dataclass
 class ModelTrainerConfig:
@@ -71,9 +63,7 @@ class ModelTrainerConfig:
 
         self.trained_bentoml_model_name: str = "xray_model"
 
-        self.trained_model_path: int = os.path.join(
-            self.artifact_dir, TRAINED_MODEL_NAME
-        )
+        self.trained_model_path: int = os.path.join(self.artifact_dir, TRAINED_MODEL_NAME)
 
         self.train_transforms_key: str = TRAIN_TRANSFORMS_KEY
 

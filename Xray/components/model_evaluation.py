@@ -1,11 +1,8 @@
 import sys
 from typing import Tuple
-
 import torch
 from torch.nn import CrossEntropyLoss, Module
-from torch.optim import SGD, Optimizer
 from torch.utils.data import DataLoader
-
 from Xray.entity.artifact_entity import (
     DataTransformationArtifact,
     ModelEvaluationArtifact,
@@ -20,12 +17,7 @@ from Xray.model.arch import Net
 
 
 class ModelEvaluation:
-    def __init__(
-        self,
-        data_transformation_artifact: DataTransformationArtifact,
-        model_evaluation_config: ModelEvaluationConfig,
-        model_trainer_artifact: ModelTrainerArtifact,
-    ):
+    def __init__(self,data_transformation_artifact: DataTransformationArtifact,model_evaluation_config: ModelEvaluationConfig,model_trainer_artifact: ModelTrainerArtifact):
 
         self.data_transformation_artifact = data_transformation_artifact
 
@@ -37,9 +29,7 @@ class ModelEvaluation:
         logging.info("Entered the configuration method of Model evaluation class")
 
         try:
-            test_dataloader: DataLoader = (
-                self.data_transformation_artifact.transformed_test_object
-            )
+            test_dataloader: DataLoader = (self.data_transformation_artifact.transformed_test_object)
 
             model: Module = Net()
 
@@ -48,10 +38,6 @@ class ModelEvaluation:
             model.to(self.model_evaluation_config.device)
 
             cost: Module = CrossEntropyLoss()
-
-            '''optimizer: Optimizer = SGD(
-                model.parameters(), **self.model_evaluation_config.optimizer_params
-            )'''
 
             model.eval()
 
@@ -87,28 +73,19 @@ class ModelEvaluation:
 
                         holder.append(h)
 
-                    logging.info(
-                        f"Actual_Labels : {labels}     Predictions : {predictions}     labels : {loss.item():.4f}"
-                    )
+                    logging.info(f"Actual_Labels : {labels}     Predictions : {predictions}     labels : {loss.item():.4f}")
 
                     self.model_evaluation_config.test_loss += loss.item()
 
-                    self.model_evaluation_config.test_accuracy += (
-                        (predictions == labels).sum().item()
-                    )
+                    self.model_evaluation_config.test_accuracy += ((predictions == labels).sum().item())
 
                     self.model_evaluation_config.total_batch += 1
 
                     self.model_evaluation_config.total += labels.size(0)
 
-                    logging.info(
-                        f"Model  -->   Loss : {self.model_evaluation_config.test_loss/ self.model_evaluation_config.total_batch} Accuracy : {(self.model_evaluation_config.test_accuracy / self.model_evaluation_config.total) * 100} %"
-                    )
+                    logging.info(f"Model  -->   Loss : {self.model_evaluation_config.test_loss/ self.model_evaluation_config.total_batch} Accuracy : {(self.model_evaluation_config.test_accuracy / self.model_evaluation_config.total) * 100} %")
 
-            accuracy = (
-                self.model_evaluation_config.test_accuracy
-                / self.model_evaluation_config.total
-            ) * 100
+            accuracy = (self.model_evaluation_config.test_accuracy/ self.model_evaluation_config.total) * 100
 
             logging.info("Exited the test_net method of Model evaluation class")
 
@@ -118,20 +95,14 @@ class ModelEvaluation:
             raise XRayException(e, sys)
 
     def initiate_model_evaluation(self) -> ModelEvaluationArtifact:
-        logging.info(
-            "Entered the initiate_model_evaluation method of Model evaluation class"
-        )
+        logging.info("Entered the initiate_model_evaluation method of Model evaluation class")
 
         try:
             accuracy = self.test_net()
 
-            model_evaluation_artifact: ModelEvaluationArtifact = (
-                ModelEvaluationArtifact(model_accuracy=accuracy)
-            )
+            model_evaluation_artifact: ModelEvaluationArtifact = ( ModelEvaluationArtifact(model_accuracy=accuracy))
 
-            logging.info(
-                "Exited the initiate_model_evaluation method of Model evaluation class"
-            )
+            logging.info("Exited the initiate_model_evaluation method of Model evaluation class")
 
             return model_evaluation_artifact
 

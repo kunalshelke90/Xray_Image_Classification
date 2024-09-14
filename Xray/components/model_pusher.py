@@ -13,7 +13,6 @@ class ModelPusher:
 
     
     def initiate_model_pusher(self):
-
         """
         Method Name :   initiate_model_pusher
 
